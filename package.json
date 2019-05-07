@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ObsidianWolf/Bamazon#readme",
   "dependencies": {
+    "cli-table3": "^0.5.1",
     "dotenv": "^8.0.0",
     "inquirer": "^6.3.1",
     "mysql2": "^1.6.5"
