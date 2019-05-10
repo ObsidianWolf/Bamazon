@@ -79,6 +79,7 @@ function shopping() {
           var quantity = answer2.quantity;
           if(quantity > res[0].stock_quantity){
             console.log("Our apologies, We only have " + res[0].stock_quantity + " items of the product selected");
+            shopping();
           }else{
             console.log("" +'\n'
             +res[0].product_name + " purchased." + '\n'
