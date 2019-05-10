@@ -38,7 +38,7 @@ function display() {
     });
 
     for(var i = 0; i < res.length; i++) {
-      table.push([res[i].item_id, res[i].product_name, res[i].price]);
+      table.push([res[i].id, res[i].product_name, res[i].price]);
     }
 
     console.log("---------------------------------------" + '\n'
@@ -64,7 +64,7 @@ function shopping() {
     }
   ]).then(function (answer1){
     var selection = answer1.productToBuy;
-    connection.query("SELECT * FROM products WHERE item_id=?", selection, function (err, res) {
+    connection.query("SELECT * FROM products WHERE id=?", selection, function (err, res) {
       if(err) throw err;
       if(res.length === 0) {
         console.log("That product doesn't exist, Please enter a Product Id from the list above.");
@@ -78,18 +78,17 @@ function shopping() {
         ]).then(function (answer2){
           var quantity = answer2.quantity;
           if(quantity > res[0].stock_quantity){
-            console.log("Our apologies, We only have " + res[0].stock_quantity +
-            " items of the product selected");
+            console.log("Our apologies, We only have " + res[0].stock_quantity + " items of the product selected");
           }else{
             console.log("" +'\n'
             +res[0].product_name + " purchased." + '\n'
-            + quantity + " qty @ $" + res[0].price);
+            + quantity + " qty @ $" + res[0].price + '\n'
+            + "for a Total of $" + parseFloat(quantity * res[0].price).toFixed(2));
 
             var newQuantity = res[0].stock_quantity - quantity;
-            connection.query("UPDATE products SET stock_quantity = " + newQuantity 
-            + "WHERE item_id = " + res[0].item_id, function (err, resUpdate) {
+            connection.query("UPDATE products SET stock_quantity = ? WHERE id = ?; " , [newQuantity, res[0].id],
+             function (err, resUpdate) {
               if(err) throw err;
-              console.log(resUpdate);
               console.log("" + '\n'
               + "Your order has been processed" + '\n'
               + "Thank you for shopping with us...!" + '\n'
