@@ -10,4 +10,6 @@ Here's a video that shows you how Bamazon works. [Bamazon in action](https://dri
 
 ![Enter how many of that product you'd like to Purchase](/images/howMany.JPG)
 
+![Here's mySQL keeping track of what you have total of that product](/images/noOverPurchase.JPG)
+
 ![Heres your total, Have a good One!](/images/yourTotal.JPG)
